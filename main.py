@@ -46,15 +46,15 @@ def plot_metrics(v1, v2, m1, m2, p1, p2, filename):
 
 if __name__ == "__main__":
 
-    print("🚀 SCRIPT STARTED")
+    print("SCRIPT STARTED")
 
     files = os.listdir(input_folder)
-    print("📂 Files found:", files)
+    print("Files found:", files)
 
     for file in files:
         if file.endswith(".csv"):
 
-            print(f"🔄 Processing: {file}")
+            print(f"Processing: {file}")
 
             df = pd.read_csv(os.path.join(input_folder, file))
 
@@ -78,7 +78,7 @@ if __name__ == "__main__":
 
             report.append([file, v1, v2, m1, m2, p1, p2, best])
 
-            print(f"✅ {file} → Best: {best}")
+            print(f"{file} → Best: {best}")
 
     pd.DataFrame(report, columns=[
         "File", "Var_Greedy", "Var_KMeans",
@@ -87,4 +87,4 @@ if __name__ == "__main__":
         "Best_Method"
     ]).to_csv("comparison_report.csv", index=False)
 
-    print("📊 Report Generated!")
+    print("Report Generated!")
