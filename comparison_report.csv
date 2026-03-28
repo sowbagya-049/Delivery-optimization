@@ -1,0 +1,11 @@
+File,Var_Greedy,Var_KMeans,Max_Greedy,Max_KMeans,Priority_Greedy,Priority_KMeans,Best_Method
+edge_all_high_priority.csv,66.66666666666667,266.6666666666667,45,55,18,18,Greedy
+edge_duplicate_locations.csv,38.88888888888889,422.2222222222222,40,60,14,10,Greedy
+edge_large_dataset.csv,141.55555555555557,3217.555555555556,169,218,41,41,Greedy
+edge_minimum_data.csv,66.66666666666667,66.66666666666667,30,30,6,6,KMeans
+edge_one_large_distance.csv,218909.5555555556,207334.8888888889,1018,1000,12,12,KMeans
+edge_same_distance.csv,0.0,800.0,20,60,12,12,Greedy
+edge_skewed_priority.csv,33.55555555555555,14.888888888888891,33,29,11,11,KMeans
+edge_unbalanced_distances.csv,1734.0,32072.0,307,450,12,12,Greedy
+edge_zero_distance.csv,72.22222222222223,338.8888888888889,35,45,12,12,Greedy
+test1.csv,105.55555555555554,238.88888888888889,45,55,11,11,Greedy

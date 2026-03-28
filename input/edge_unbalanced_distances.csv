@@ -1,0 +1,7 @@
+Location ID,Distance from warehouse,Delivery Priority
+L1,5,High
+L2,6,Medium
+L3,7,Low
+L4,200,High
+L5,250,Medium
+L6,300,Low
