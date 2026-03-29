@@ -21,6 +21,8 @@ def plot_distance(dist1, dist2, filename):
     plt.bar([i + 0.4 for i in x], d2, width=0.4, label="KMeans")
     plt.xticks([i + 0.2 for i in x], [f"A{i+1}" for i in range(len(agents))])
     plt.title("Distance Comparison")
+    plt.xlabel("Agents")
+    plt.ylabel("Total Distance")
     plt.legend()
 
     plt.savefig(f"{output_folder}/{filename}_distance.png")
@@ -38,6 +40,8 @@ def plot_metrics(v1, v2, m1, m2, p1, p2, filename):
     plt.bar([i + 0.4 for i in x], k, width=0.4, label="KMeans")
     plt.xticks([i + 0.2 for i in x], labels)
     plt.title("Metrics Comparison")
+    plt.xlabel("Metrics")
+    plt.ylabel("Values")
     plt.legend()
 
     plt.savefig(f"{output_folder}/{filename}_metrics.png")
@@ -54,23 +58,53 @@ if __name__ == "__main__":
     for file in files:
         if file.endswith(".csv"):
 
-            print(f"Processing: {file}")
+            print(f"\nProcessing: {file}")
 
             df = pd.read_csv(os.path.join(input_folder, file))
 
             a1, d1, v1, m1, p1 = method_greedy(df.copy())
             a2, d2, v2, m2, p2 = method_kmeans(df.copy())
 
+            
             best = decision_function(v1, v2, m1, m2, p1, p2)
             final_agents = a1 if best == "Greedy" else a2
 
             output = []
+
             for agent in final_agents:
                 for loc in final_agents[agent]:
-                    output.append([agent, loc])
+                    row = df[df["Location ID"] == loc].iloc[0]
 
-            pd.DataFrame(output, columns=["Agent", "Location ID"]).to_csv(
+                    output.append([
+                        agent,
+                        loc,
+                        row["Distance from warehouse"],
+                        row["Delivery Priority"]
+                    ])
+
+            output_df = pd.DataFrame(output, columns=[
+                "Agent", "Location ID", "Distance", "Priority"
+            ])
+
+            output_df.to_csv(
                 f"{output_folder}/output_{file}", index=False
+            )
+
+            summary = []
+
+            for agent in final_agents:
+                total_distance = 0
+                for loc in final_agents[agent]:
+                    total_distance += df[df["Location ID"] == loc]["Distance from warehouse"].values[0]
+
+                summary.append([agent, total_distance])
+
+            summary_df = pd.DataFrame(summary, columns=[
+                "Agent", "Total Distance"
+            ])
+
+            summary_df.to_csv(
+                f"{output_folder}/summary_{file}", index=False
             )
 
             plot_distance(d1, d2, file)
@@ -78,13 +112,16 @@ if __name__ == "__main__":
 
             report.append([file, v1, v2, m1, m2, p1, p2, best])
 
-            print(f"{file} → Best: {best}")
+            print(f"{file} → Best Method: {best}")
 
-    pd.DataFrame(report, columns=[
+    report_df = pd.DataFrame(report, columns=[
         "File", "Var_Greedy", "Var_KMeans",
         "Max_Greedy", "Max_KMeans",
         "Priority_Greedy", "Priority_KMeans",
         "Best_Method"
-    ]).to_csv("comparison_report.csv", index=False)
+    ])
 
-    print("Report Generated!")
+    report_df.to_csv("comparison_report.csv", index=False)
+
+    print("\ncomparison_report.csv generated!")
+    print("All processing completed!")

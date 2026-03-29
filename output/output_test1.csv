@@ -1,6 +1,6 @@
-Agent,Location ID
-1,L1
-1,L5
-2,L4
-2,L3
-3,L2
+Agent,Location ID,Distance,Priority
+1,L1,10,High
+1,L5,25,Medium
+2,L4,15,High
+2,L3,30,Low
+3,L2,20,Medium
