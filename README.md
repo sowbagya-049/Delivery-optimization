@@ -1,12 +1,12 @@
-# Delivery Optimization System
+#  Delivery Optimization System
 
-## Overview
+##  Overview
 
 This project focuses on solving a **Logistics Delivery Optimization Problem** using advanced decision-making techniques. The system processes delivery data and assigns tasks to agents efficiently while balancing workload and prioritizing urgent deliveries.
 
 ---
 
-## Objectives
+##  Objectives
 
 * Read delivery data from CSV files
 * Prioritize deliveries based on urgency
@@ -17,7 +17,7 @@ This project focuses on solving a **Logistics Delivery Optimization Problem** us
 
 ---
 
-## Input Format
+##  Input Format
 
 Each input CSV file must contain:
 
@@ -29,14 +29,14 @@ Each input CSV file must contain:
 
 ---
 
-## Algorithms Used
+##  Algorithms Used
 
 ### 🔹 1. Greedy + Priority Weighting
 
-* Assigns priority values (High=3, Medium=2, Low=1)
+* Assigns priority values (High = 3, Medium = 2, Low = 1)
 * Computes score = Priority / Distance
 * Sorts deliveries based on score
-* Assigns tasks to agent with minimum distance
+* Assigns tasks to the agent with minimum total distance
 
 ✔ Fast and efficient
 ✔ Ensures priority handling
@@ -46,7 +46,7 @@ Each input CSV file must contain:
 ### 🔹 2. K-Means Clustering
 
 * Groups locations into 3 clusters
-* Each cluster assigned to an agent
+* Each cluster is assigned to an agent
 * Minimizes travel distance naturally
 
 ✔ Good for spatial grouping
@@ -54,48 +54,87 @@ Each input CSV file must contain:
 
 ---
 
-## Decision Technique
+##  Decision Technique
 
 A **Multi-Criteria Decision Making (MCDM)** approach is used to select the best method based on:
 
-* Variance → Load balancing
-* Maximum Distance → Workload fairness
-* Priority Score → Urgency handling
+*  Variance → Load balancing
+*  Maximum Distance → Workload fairness
+*  Priority Score → Urgency handling
 
-### Decision Formula:
+###  Decision Formula:
 
 Score = 0.5 × Variance + 0.3 × Max Distance − 0.2 × Priority Score
 
-Lower score = Better method
+ Lower score indicates a better solution
 
 ---
 
-## Workflow
+##  Workflow
 
 1. Read all input CSV files
-2. Apply both algorithms
+2. Apply both algorithms (Greedy & K-Means)
 3. Calculate performance metrics
-4. Compare results
-5. Select best method
-6. Generate outputs and plots
+4. Compare results using MCDM
+5. Select the best method
+6. Generate outputs and visualizations
 
 ---
 
-## Output Files
+##  Output Files
 
-For each input file:
+For each input file, the system generates:
 
-* Optimized delivery plan (`output_*.csv`)
+###  1. Optimized Delivery Plan (`output_*.csv`)
+
+Includes:
+
+* Agent assignment
+* Location ID
+* Distance
+* Priority
+
+Example:
+
+```
+Agent,Location ID,Distance,Priority
+1,L1,10,High
+1,L4,15,High
+2,L2,20,Medium
+```
+
+---
+
+###  2. Agent Distance Summary (`summary_*.csv`) ⭐
+
+Includes total workload per agent:
+
+```
+Agent,Total Distance
+1,25
+2,45
+3,42
+```
+
+✔ Ensures requirement: *“total distance per agent”*
+
+---
+
+###  3. Visualization Outputs
+
 * Distance comparison plot
 * Metrics comparison plot
 
-### Final Output:
+---
+
+###  4. Final Report
 
 * `comparison_report.csv`
+* Contains performance comparison across all test cases
 
 ---
 
-## Edge Case Testing
+##  Edge Case Testing
 
 The system was tested on multiple edge cases:
 
@@ -110,30 +149,30 @@ The system was tested on multiple edge cases:
 
 ---
 
-## Project Structure
+##  Project Structure
 
 ```
 DeliveryOptimization/
 │
-├── input/              # Input CSV files
-├── output/             # Generated outputs
-├── main.py             # Main execution file
-├── utils.py            # Core logic functions
-├── README.md           # Documentation
-├── comparison_report.csv
+├── input/                   # Input CSV files
+├── output/                  # Generated outputs
+├── main.py                  # Main execution file
+├── utils.py                 # Core logic functions
+├── README.md                # Documentation
+├── comparison_report.csv    # Final comparison report
 ```
 
 ---
 
-## How to Run
+##  How to Run
 
-1. Install required libraries:
+### 1. Install required libraries:
 
 ```
 pip install pandas numpy matplotlib scikit-learn
 ```
 
-2. Run the program:
+### 2. Run the program:
 
 ```
 python main.py
@@ -141,7 +180,7 @@ python main.py
 
 ---
 
-## Features
+##  Features
 
 ✔ Multi-algorithm approach
 ✔ Automated decision-making
@@ -152,23 +191,23 @@ python main.py
 
 ---
 
-## Key Concepts Used
+##  Key Concepts Used
 
 * Greedy Algorithms
-* Clustering (K-Means)
+* K-Means Clustering
 * Load Balancing
-* Multi-Criteria Decision Making
+* Multi-Criteria Decision Making (MCDM)
 * Data Analysis & Visualization
 
 ---
 
-## Conclusion
+##  Conclusion
 
-This project demonstrates how combining multiple optimization techniques with decision-making strategies can significantly improve logistics efficiency. The system dynamically selects the best approach based on real-world conditions, making it robust and adaptable.
+This project demonstrates how combining multiple optimization techniques with decision-making strategies can significantly improve logistics efficiency. The system dynamically selects the best approach based on real-world conditions, making it robust, scalable, and efficient.
 
 ---
 
-## Submitted By
+##  Submitted By
 
-Sowbagya V S - 
-2303717673722049
+**Sowbagya V S**
+**Reg No: 2303717673722049**
