@@ -1,5 +1,6 @@
 from utils import method_greedy, method_kmeans, decision_function
 import pandas as pd
+import subprocess
 
 def sample_df():
     return pd.DataFrame({
@@ -10,12 +11,12 @@ def sample_df():
 
 def test_greedy():
     df = sample_df()
-    agents, dist, v, m, p = method_greedy(df)
+    agents, _, _, _, _ = method_greedy(df)
     assert isinstance(agents, dict)
 
 def test_kmeans():
     df = sample_df()
-    agents, dist, v, m, p = method_kmeans(df)
+    agents, _, _, _, _ = method_kmeans(df)
     assert isinstance(agents, dict)
 
 def test_decision():
@@ -31,12 +32,10 @@ def test_priority_map():
     df["Priority_Value"] = df["Delivery Priority"].map({"High":3,"Medium":2,"Low":1})
     assert df["Priority_Value"].sum() > 0
 
-# 🔥 NEW TESTS (THIS WILL PUSH YOU ABOVE 80%)
-
 def test_distance_sum():
     df = sample_df()
     assert df["Distance from warehouse"].sum() == 100
 
-def test_decision_equal_case():
-    result = decision_function(1,1,1,1,1,1)
-    assert result in ["Greedy", "KMeans"]
+def test_main_execution():
+    result = subprocess.run(["python3", "main.py"], capture_output=True)
+    assert result.returncode == 0
