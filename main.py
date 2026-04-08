@@ -3,17 +3,23 @@ import os
 import matplotlib.pyplot as plt
 from utils import method_greedy, method_kmeans, decision_function
 
+# ✅ Constants (Fix Sonar issues)
+LOCATION_ID = "Location ID"
+DISTANCE = "Distance from warehouse"
+PRIORITY = "Delivery Priority"
+
 API_KEY = os.getenv("API_KEY")
 
 if API_KEY:
     print("API loaded")
-    
+
 input_folder = "input"
 output_folder = "output"
 
 os.makedirs(output_folder, exist_ok=True)
 
 report = []
+
 
 def plot_distance(dist1, dist2, filename):
     agents = list(dist1.keys())
@@ -70,7 +76,6 @@ if __name__ == "__main__":
             a1, d1, v1, m1, p1 = method_greedy(df.copy())
             a2, d2, v2, m2, p2 = method_kmeans(df.copy())
 
-            
             best = decision_function(v1, v2, m1, m2, p1, p2)
             final_agents = a1 if best == "Greedy" else a2
 
@@ -78,17 +83,17 @@ if __name__ == "__main__":
 
             for agent in final_agents:
                 for loc in final_agents[agent]:
-                    row = df[df["Location ID"] == loc].iloc[0]
+                    row = df[df[LOCATION_ID] == loc].iloc[0]
 
                     output.append([
                         agent,
                         loc,
-                        row["Distance from warehouse"],
-                        row["Delivery Priority"]
+                        row[DISTANCE],
+                        row[PRIORITY]
                     ])
 
             output_df = pd.DataFrame(output, columns=[
-                "Agent", "Location ID", "Distance", "Priority"
+                "Agent", LOCATION_ID, "Distance", "Priority"
             ])
 
             output_df.to_csv(
@@ -100,7 +105,7 @@ if __name__ == "__main__":
             for agent in final_agents:
                 total_distance = 0
                 for loc in final_agents[agent]:
-                    total_distance += df[df["Location ID"] == loc]["Distance from warehouse"].values[0]
+                    total_distance += df[df[LOCATION_ID] == loc][DISTANCE].values[0]
 
                 summary.append([agent, total_distance])
 
