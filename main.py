@@ -2,7 +2,6 @@ import pandas as pd
 import os
 import matplotlib.pyplot as plt
 from utils import method_greedy, method_kmeans, decision_function
-import os
 API_KEY = os.getenv("API_KEY")
 
 input_folder = "input"
