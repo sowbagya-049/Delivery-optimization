@@ -29,8 +29,8 @@ pipeline {
         stage('Run Tests with Coverage') {
             steps {
                 sh '''
-                coverage run -m pytest
-                coverage xml
+                ~/.local/bin/coverage run -m pytest
+                ~/.local/bin/coverage xml
                 '''
             }
         }
