@@ -5,7 +5,8 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                git 'https://github.com/sowbagya-049/Delivery-optimization.git'
+                git branch: 'main', url: 'https://github.com/sowbagya-049/Delivery-optimization.git'
+
             }
         }
 
