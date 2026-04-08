@@ -41,7 +41,7 @@ pipeline {
                       -Dsonar.projectKey=delivery-optimization \
                       -Dsonar.sources=. \
                       -Dsonar.host.url=http://sonarqube:9000 \
-                      -Dsonar.login=squ_80b05dd0a6ad27fddbb99cb3558725823ebb7854
+                      -Dsonar.token=squ_80b05dd0a6ad27fddbb99cb3558725823ebb7854
 
                     '''
                 }
