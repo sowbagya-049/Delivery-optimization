@@ -13,7 +13,7 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 sh '''
-                pyhthon3 --version
+                python3 --version
                 pip3 --version
 
                 pip install pandas numpy matplotlib scikit-learn pytest
