@@ -2,8 +2,8 @@ import pandas as pd
 import os
 import matplotlib.pyplot as plt
 from utils import method_greedy, method_kmeans, decision_function
-
-API_KEY = "my-secret-key-123456"  # hardcoded secret (vulnerability)
+import os
+API_KEY = os.getenv("API_KEY")
 
 input_folder = "input"
 output_folder = "output"
