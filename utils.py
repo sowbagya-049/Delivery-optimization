@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 from sklearn.cluster import KMeans
 
-# ✅ CONSTANTS
+# ✅ CONSTANTS (fix Sonar issues)
 LOCATION_COL = "Location ID"
 DISTANCE_COL = "Distance from warehouse"
 PRIORITY_COL = "Delivery Priority"
@@ -23,6 +23,7 @@ def calculate_metrics(agent_distance, agents, df):
     return variance, max_dist, priority_score
 
 
+# Greedy Method
 def method_greedy(df):
     df["Priority_Value"] = df[PRIORITY_COL].map(priority_map)
     df["Score"] = df["Priority_Value"] / df[DISTANCE_COL]
@@ -38,9 +39,11 @@ def method_greedy(df):
         agent_distance[agent] += row[DISTANCE_COL]
 
     var, max_d, p_score = calculate_metrics(agent_distance, agents, df)
+
     return agents, agent_distance, var, max_d, p_score
 
 
+# KMeans Method
 def method_kmeans(df):
     df["Priority_Value"] = df[PRIORITY_COL].map(priority_map)
 
@@ -56,9 +59,11 @@ def method_kmeans(df):
         agent_distance[c] += row[DISTANCE_COL]
 
     var, max_d, p_score = calculate_metrics(agent_distance, agents, df)
+
     return agents, agent_distance, var, max_d, p_score
 
 
+# Decision Function
 def decision_function(var1, var2, max1, max2, p1, p2):
     score1 = 0.5 * var1 + 0.3 * max1 - 0.2 * p1
     score2 = 0.5 * var2 + 0.3 * max2 - 0.2 * p2
