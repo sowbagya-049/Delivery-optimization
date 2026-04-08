@@ -3,6 +3,8 @@ import os
 import matplotlib.pyplot as plt
 from utils import method_greedy, method_kmeans, decision_function
 
+API_KEY = os.getenv("API_KEY")
+
 if API_KEY:
     print("API loaded")
     
