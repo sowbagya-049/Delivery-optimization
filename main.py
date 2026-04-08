@@ -3,11 +3,12 @@ import os
 import matplotlib.pyplot as plt
 from utils import method_greedy, method_kmeans, decision_function
 
-# ✅ Constants (Fix Sonar issues)
-LOCATION_ID = "Location ID"
-DISTANCE = "Distance from warehouse"
-PRIORITY = "Delivery Priority"
+# ✅ CONSTANTS (fix Sonar issues)
+LOCATION_COL = "Location ID"
+DISTANCE_COL = "Distance from warehouse"
+PRIORITY_COL = "Delivery Priority"
 
+# Secure way (no hardcoded secrets)
 API_KEY = os.getenv("API_KEY")
 
 if API_KEY:
@@ -83,17 +84,17 @@ if __name__ == "__main__":
 
             for agent in final_agents:
                 for loc in final_agents[agent]:
-                    row = df[df[LOCATION_ID] == loc].iloc[0]
+                    row = df[df[LOCATION_COL] == loc].iloc[0]
 
                     output.append([
                         agent,
                         loc,
-                        row[DISTANCE],
-                        row[PRIORITY]
+                        row[DISTANCE_COL],
+                        row[PRIORITY_COL]
                     ])
 
             output_df = pd.DataFrame(output, columns=[
-                "Agent", LOCATION_ID, "Distance", "Priority"
+                "Agent", LOCATION_COL, "Distance", "Priority"
             ])
 
             output_df.to_csv(
@@ -105,7 +106,7 @@ if __name__ == "__main__":
             for agent in final_agents:
                 total_distance = 0
                 for loc in final_agents[agent]:
-                    total_distance += df[df[LOCATION_ID] == loc][DISTANCE].values[0]
+                    total_distance += df[df[LOCATION_COL] == loc][DISTANCE_COL].values[0]
 
                 summary.append([agent, total_distance])
 
