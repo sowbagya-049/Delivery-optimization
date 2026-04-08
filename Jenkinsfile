@@ -16,7 +16,7 @@ pipeline {
                 python3 --version
                 pip3 --version
 
-                pip install pandas numpy matplotlib scikit-learn pytest
+                pip3 install --break-system-packages pandas numpy matplotlib scikit-learn pytest
                 '''
             }
         }
